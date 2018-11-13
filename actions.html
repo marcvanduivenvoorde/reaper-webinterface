@@ -1,33 +1,52 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+  <script src="./configuration.js"></script>
   <script src="./assets/js/jquery-3.3.1.min.js"></script>
   <script src="./assets/js/popper.js-1.14.5/dist/popper.js"></script>
   <script src="./assets/js/popper.js-1.14.5/dist/popper-utils.js"></script>
   <script src="./assets/js/bootstrap.js"></script>
   <script src="./assets/js/bootstrap.bundle.js"></script>
   <script src="./assets/fontawesome-free-5.5.0-web/js/all.min.js"></script>
+  <script src="./assets/js/reaper.js"></script>
 
   <link rel="stylesheet" href="./assets/css/bootstrap.css">
   <link rel="stylesheet" href="./assets/css/bootstrap-grid.css">
   <link rel="stylesheet" href="./assets/css/bootstrap-reboot.css">
   <link rel="stylesheet" href="./assets/fontawesome-free-5.5.0-web/css/all.min.css">
+
+  <script>
+    $(document).ready(function () {
+      $.each(configuration.customActions, function (i, v) {
+        var identifier = i;
+        var el = $('<span><button class="btn btn-success btn-lg secondary mr-1">' + v + '</button></span>');
+        el.on('click', function () {
+          wwr_req(identifier);
+        });
+
+        $('#actions').append(el);
+      });
+    });
+
+    wwr_start();
+  </script>
+
 </head>
 
 <body>
 <section class="head container-fluid">
   <div class="row card">
     <div class="col col-12 card-body">
-      <a href="./transport.html"><button type="button" class="btn btn-success btn-lg">Transport</button></a>
-      <a href="./screensets.html"><button type="button" class="btn btn-warning btn-lg" >Screensets</button></a>
-      <a  href="./actions.html"><button type="button" class="btn btn-info btn-lg">Actions</button></a>
+      <a href="./transport.html"><button type="button" class="btn btn-primary btn-lg">Transport</button></a>
+      <a href="./tracks.html"><button type="button" class="btn btn-primary btn-lg">Tracks</button></a>
+      <a href="./screensets.html"><button type="button" class="btn btn-primary btn-lg" >Screensets</button></a>
+      <a href="./actions.html"><button type="button" class="btn btn-primary btn-lg">Actions</button></a>
     </div>
   </div>
 </section>
 <section class="content container-fluid">
   <div class="row class">
-    <div class="col col-12 card-body">
-      <button class="btn btn-success btn-lg action"></button>
+    <div class="col col-12 card-body" id="actions">
     </div>
   </div>
 </section>

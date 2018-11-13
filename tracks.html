@@ -8,14 +8,31 @@
   <script src="./assets/js/bootstrap.js"></script>
   <script src="./assets/js/bootstrap.bundle.js"></script>
   <script src="./assets/fontawesome-free-5.5.0-web/js/all.min.js"></script>
+  <script src="./assets/js/reaper.js"></script>
 
   <link rel="stylesheet" href="./assets/css/bootstrap.css">
   <link rel="stylesheet" href="./assets/css/bootstrap-grid.css">
   <link rel="stylesheet" href="./assets/css/bootstrap-reboot.css">
   <link rel="stylesheet" href="./assets/fontawesome-free-5.5.0-web/css/all.min.css">
+
+  <script>
+    $(document).ready(function () {
+      $.each(configuration.showTracks, function (i, v) {
+        var identifier = i;
+        var el = $('<span><button class="btn btn-success btn-lg secondary mr-1">' + v + '</button></span>');
+        el.on('click', function () {
+          wwr_req(identifier);
+        });
+
+        $('#actions').append(el);
+      });
+    });
+
+    wwr_start();
+  </script>
 </head>
 
-<body>
+<body class="container-fluid">
 <section class="head container-fluid">
   <div class="row card">
     <div class="col col-12 card-body">
@@ -28,8 +45,7 @@
 </section>
 <section class="content container-fluid">
   <div class="row class">
-    <div class="col col-12 card-body">
-      <button class="btn btn-success btn-lg action"></button>
+    <div class="col col-12 card-body" id="actions">
     </div>
   </div>
 </section>
