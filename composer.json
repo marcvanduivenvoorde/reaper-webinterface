@@ -11,6 +11,7 @@
     ],
     "require": {
         "twig/twig": "^2.5",
-        "symfony/filesystem": "^4.1"
+        "symfony/filesystem": "^4.1",
+        "cocur/slugify": "^3.1"
     }
 }

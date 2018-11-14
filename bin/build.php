@@ -1,15 +1,18 @@
 <?php
 
+use Cocur\Slugify\Slugify;
 use Symfony\Component\Filesystem\Filesystem;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $twigLoader = new Twig\Loader\FilesystemLoader([__DIR__ . '/../resources']);
 $twig = new Twig_Environment($twigLoader);
+$slugger = new Slugify();
+$filesystem = new Filesystem();
 
 $outputPath = __DIR__ .'/../build/';
 
-// clear output path
+$filesystem->remove($outputPath . '/*');
 
 $configuration = json_decode(file_get_contents(dirname(__DIR__) . '/build.json'), true);
 
@@ -27,7 +30,7 @@ $navigationLinks = [
 
 foreach ($configuration['pages'] as $page => $items) {
   $navigationLinks[] = [
-    'page' => strtolower($page),
+    'page' => $slugger->slugify($page),
     'title' => $page,
   ];
 }
@@ -48,7 +51,7 @@ foreach ($configuration['pages'] as $page => $data) {
     ]
   );
 
-  file_put_contents($outputPath . '/' . strtolower($page) . '.html', $template);
+  file_put_contents($outputPath . '/' . $slugger->slugify($page) . '.html', $template);
 }
 
 $template = $twig->render(
@@ -58,7 +61,5 @@ $template = $twig->render(
   ]
 );
 file_put_contents($outputPath . '/index.html', $template);
-
-$filesystem = new Filesystem();
 
 $filesystem->mirror(dirname(__DIR__) . '/assets', $outputPath . '/assets');
