@@ -43,6 +43,7 @@ foreach ($configuration['pages'] as $page => $data) {
       'title' => $row,
     ];
   }
+
   $template = $twig->render(
     'page.html.twig',
     [
@@ -57,7 +58,7 @@ foreach ($configuration['pages'] as $page => $data) {
 $template = $twig->render(
   'transport.html.twig',
   [
-    'navigationLinks' => $navigationLinks
+    'navigationLinks' => $navigationLinks,
   ]
 );
 file_put_contents($outputPath . '/index.html', $template);
