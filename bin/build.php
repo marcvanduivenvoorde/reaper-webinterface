@@ -10,9 +10,10 @@ $twig = new Twig_Environment($twigLoader);
 $slugger = new Slugify();
 $filesystem = new Filesystem();
 
-$outputPath = __DIR__ .'/../build/';
+$outputPath = __DIR__ .'/../build';
 
-$filesystem->remove($outputPath . '/*');
+$filesystem->remove($outputPath);
+$filesystem->mirror(dirname(__DIR__) . '/assets', $outputPath . '/assets');
 
 $configuration = json_decode(file_get_contents(dirname(__DIR__) . '/build.json'), true);
 
@@ -20,6 +21,7 @@ if (!$configuration) {
   die('no valid config');
 }
 
+$all = [];
 $navigationLinks = [
   [
     'page' => 'index',
@@ -35,6 +37,11 @@ foreach ($configuration['pages'] as $page => $items) {
   ];
 }
 
+$navigationLinks[] =   [
+  'page' => 'all',
+  'title' => 'all',
+];
+
 foreach ($configuration['pages'] as $page => $data) {
   $items = [];
   foreach ($data as $index => $row) {
@@ -44,10 +51,16 @@ foreach ($configuration['pages'] as $page => $data) {
     ];
   }
 
+  $all[] = [
+    'title' => $page,
+    'items' => $items,
+  ];
+
   $template = $twig->render(
     'page.html.twig',
     [
       'navigationLinks' => $navigationLinks,
+      'title' => $page,
       'items' => $items,
     ]
   );
@@ -63,4 +76,11 @@ $template = $twig->render(
 );
 file_put_contents($outputPath . '/index.html', $template);
 
-$filesystem->mirror(dirname(__DIR__) . '/assets', $outputPath . '/assets');
+$template = $twig->render(
+  'all.html.twig',
+  [
+    'navigationLinks' => $navigationLinks,
+    'contentblocks' => $all
+  ]
+);
+file_put_contents($outputPath . '/all.html', $template);

@@ -21,11 +21,11 @@
 </head>
 
 <body>
-<section class="head container-fluid">
-  <div class="row card">
+<section class="head container-fluid mb-2">
+  <div class="card">
     <div class="col col-12 card-body">
       {% for item in navigationLinks %}
-        <a href="./{{ item.page }}.html"><button type="button" class="btn btn-primary btn-lg">{{ item.title }}</button></a>
+        <a href="./{{ item.page }}.html"><button type="button" class="btn btn-primary btn-lg m-1">{{ item.title }}</button></a>
       {%  endfor %}
     </div>
   </div>

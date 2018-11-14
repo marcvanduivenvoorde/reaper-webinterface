@@ -1,10 +1,12 @@
 {% extends "index.html.twig" %}
 
 {% block content %}
-    <div class="row class">
+    <div class="card">
+        <div class="card-header">{{ title }}</div>
+
         <div class="col col-12 card-body">
         {% for item in items %}
-            <span><button class="btn btn-success btn-lg secondary mr-1" onclick="wwr_req('{{ item.identifier }}');">{{ item.title }}</button></span>
+            <span><button class="btn btn-success btn-lg secondary m-1" onclick="wwr_req('{{ item.identifier }}');">{{ item.title }}</button></span>
         {% endfor %}
         </div>
     </div>
