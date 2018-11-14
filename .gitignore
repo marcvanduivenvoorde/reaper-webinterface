@@ -1,1 +1,5 @@
 .idea/
+
+/vendor/
+/build/
+build.json

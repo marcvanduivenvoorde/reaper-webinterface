@@ -1,0 +1,13 @@
+{% extends "index.html.twig" %}
+
+{% block content %}
+<section class="content container-fluid">
+    <div class="row class">
+        <div class="col col-12 card-body">
+        {% for item in items %}
+            <span><button class="btn btn-success btn-lg secondary mr-1" onclick="wwr_req('{{ item.identifier }}');">{{ item.title }}</button></span>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

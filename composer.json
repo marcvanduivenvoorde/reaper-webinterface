@@ -1,0 +1,16 @@
+{
+    "name": "marcvanduivenvoorde/reaper-webinterface",
+    "description": "reaper web interface generator",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc van Duivenvoorde",
+            "email": "marc.vanduivenvoorde@synetic.nl"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.5",
+        "symfony/filesystem": "^4.1"
+    }
+}
